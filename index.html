@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Web Chess</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+
+    <!-- 상단: 흑(Black) 잡은 기물 표시 -->
+    <div class="captured-bar" id="captured-black">
+      <div class="captured-label">Black's captures</div>
+      <div class="captured-pieces" id="captured-black-pieces"></div>
+    </div>
+
+    <!-- 체스판 래퍼 -->
+    <div class="board-wrapper">
+
+      <!-- 세로축 좌표 (8~1) -->
+      <div class="coords-col" id="coords-rank"></div>
+
+      <!-- 체스판 -->
+      <div class="board-container">
+        <div id="board"></div>
+        <!-- 가로축 좌표 (a~h) -->
+        <div class="coords-row" id="coords-file"></div>
+      </div>
+
+    </div>
+
+    <!-- 하단: 백(White) 잡은 기물 표시 -->
+    <div class="captured-bar" id="captured-white">
+      <div class="captured-label">White's captures</div>
+      <div class="captured-pieces" id="captured-white-pieces"></div>
+    </div>
+
+    <!-- 상태 메시지 -->
+    <div id="status-bar">
+      <span id="turn-indicator">White's Turn</span>
+      <button id="reset-btn">New Game</button>
+    </div>
+
+  </div>
+
+  <script src="chess.js"></script>
+</body>
+</html>
