@@ -33,7 +33,7 @@ body {
    Captured Pieces Bar
    ================================================ */
 .captured-bar {
-  width: 520px;
+  width: 480px;
   background-color: #262421;
   border-radius: 8px;
   padding: 8px 14px;
@@ -69,65 +69,49 @@ body {
 }
 
 /* ================================================
-   Board Wrapper (rank coords + board)
+   Chessboard
    ================================================ */
-.board-wrapper {
-  display: flex;
-  align-items: flex-start;
-  gap: 0;
-}
-
-/* --- Rank Coordinates (8~1, vertical) --- */
-.coords-col {
-  display: flex;
-  flex-direction: column;
-  width: 20px;
-  height: 480px;   /* 8 × 60px */
-}
-
-.coords-col .coord {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
-  font-weight: 700;
-  color: #b0a090;
-}
-
-/* --- Board Container --- */
-.board-container {
-  display: flex;
-  flex-direction: column;
-}
-
-/* --- Chessboard --- */
 #board {
   width: 480px;
   height: 480px;
   display: grid;
   grid-template-columns: repeat(8, 60px);
   grid-template-rows: repeat(8, 60px);
-  border: 2px solid #4a4035;
+  border: 3px solid #4a4035;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
 }
 
-/* --- File Coordinates (a~h, horizontal) --- */
-.coords-row {
-  display: flex;
-  width: 480px;
-  height: 20px;
-}
-
-.coords-row .coord {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* ── Inline coordinates ───────────────────────
+   rank: 좌상단 / file: 우하단 (chess.com 스타일)
+─────────────────────────────────────────────── */
+.coord-rank {
+  position: absolute;
+  top: 3px;
+  left: 4px;
   font-size: 11px;
   font-weight: 700;
-  color: #b0a090;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
 }
+
+.coord-file {
+  position: absolute;
+  bottom: 3px;
+  right: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* 밝은 칸 위 좌표 → 어두운 색, 어두운 칸 위 좌표 → 밝은 색 */
+.square.light .coord-rank,
+.square.light .coord-file { color: #769656; }
+
+.square.dark  .coord-rank,
+.square.dark  .coord-file { color: #eeeed2; }
 
 /* ================================================
    Squares
@@ -210,7 +194,7 @@ body {
   display: flex;
   align-items: center;
   gap: 20px;
-  width: 520px;
+  width: 480px;
   background-color: #262421;
   border-radius: 8px;
   padding: 10px 18px;
@@ -313,9 +297,7 @@ body {
 /* ================================================
    Responsive (tablet / small screens)
    ================================================ */
-@media (max-width: 600px) {
-  :root { --sq: 44px; }
-
+@media (max-width: 520px) {
   #board {
     width: 352px;
     height: 352px;
@@ -326,11 +308,11 @@ body {
   .square { width: 44px; height: 44px; }
   .piece  { width: 40px; height: 40px; }
 
-  .coords-col { height: 352px; }
-  .coords-row { width: 352px; }
-
   .captured-bar,
-  #status-bar   { width: 372px; }
+  #status-bar { width: 352px; }
 
   .square.valid-move::after { width: 16px; height: 16px; }
+
+  .coord-rank { font-size: 9px; top: 2px; left: 3px; }
+  .coord-file { font-size: 9px; bottom: 2px; right: 3px; }
 }

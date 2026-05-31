@@ -93,6 +93,22 @@ function renderBoard() {
         }
       }
 
+      // ── Inline coordinates (chess.com style) ──
+      // rank 숫자: 각 행의 첫 번째 칸(col=0) 좌상단
+      if (c === 0) {
+        const rankLabel = document.createElement('span');
+        rankLabel.classList.add('coord-rank');
+        rankLabel.textContent = RANKS[r];   // '8'~'1'
+        sq.appendChild(rankLabel);
+      }
+      // file 알파벳: 각 열의 마지막 행(row=7) 우하단
+      if (r === 7) {
+        const fileLabel = document.createElement('span');
+        fileLabel.classList.add('coord-file');
+        fileLabel.textContent = FILES[c];   // 'a'~'h'
+        sq.appendChild(fileLabel);
+      }
+
       // Piece image
       const piece = board[r][c];
       if (piece) {
@@ -109,32 +125,8 @@ function renderBoard() {
     }
   }
 
-  renderCoords();
   renderCaptured();
   renderStatus();
-}
-
-// ── Coordinates ────────────────────────────────
-function renderCoords() {
-  // Rank (8→1)
-  const rankEl = document.getElementById('coords-rank');
-  rankEl.innerHTML = '';
-  RANKS.forEach(r => {
-    const d = document.createElement('div');
-    d.classList.add('coord');
-    d.textContent = r;
-    rankEl.appendChild(d);
-  });
-
-  // File (a→h)
-  const fileEl = document.getElementById('coords-file');
-  fileEl.innerHTML = '';
-  FILES.forEach(f => {
-    const d = document.createElement('div');
-    d.classList.add('coord');
-    d.textContent = f;
-    fileEl.appendChild(d);
-  });
 }
 
 // ── Captured Pieces ────────────────────────────
